@@ -72,11 +72,11 @@ export function Main() {
         setStudents(prevStudents => {
             return prevStudents.map(student => {
                 if (student.id === id) {
+                    setRemainCoins(() => {
+                        return remainCoins -= 1
+                    });
                     return { ...student, coin: student.coin + 1 };
                 };
-                setRemainCoins(() => {
-                    return remainCoins -= 1
-                });
                 return student
             })
         });
@@ -85,12 +85,11 @@ export function Main() {
         setStudents(prevStudents => {
             return prevStudents.map(student => {
                 if (student.id === id) {
+                    setRemainCoins(() => {
+                        return remainCoins -= 5
+                    });
                     return { ...student, coin: student.coin + 5 };
                 };
-
-                setRemainCoins(() => {
-                    return remainCoins -= 5
-                });
                 return student
             })
         });
@@ -99,12 +98,12 @@ export function Main() {
         setStudents(prevStudents => {
             return prevStudents.map(student => {
                 if (student.id === id) {
+                    setRemainCoins(() => {
+                        return remainCoins += 1
+                    });
                     return { ...student, coin: student.coin - 1 };
                 };
 
-                setRemainCoins(() => {
-                    return remainCoins += 1
-                });
                 return student
             })
         });
@@ -117,7 +116,7 @@ export function Main() {
                     <h2 className="text-[#121212] dark:text-[#f3f4f6] text-lg font-bold flex flex-row items-stretch">
                         Total coins:
                         <span className="text-[#ffc107] flex flex-row gap-1 items-center">
-                            {remainCoins}
+                            &nbsp; {remainCoins}
                             <img src={coinImage} alt="coin" className="w-5 h-5 animate-rotate-y animate-infinite" />
                         </span>
                     </h2>
