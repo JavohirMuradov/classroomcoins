@@ -52,7 +52,7 @@ export function Main() {
             id: 9, name: "Alibek", surname: "Akromov", coin: 0
         },
         {
-            id: 10, name: "Shoxdiyor", surname: "Shirinboyev", coin: -1,
+            id: 10, name: "Shoxdiyor", surname: "Shirinboyev", coin: 0,
         },
     ])
     var arr = [];
@@ -66,16 +66,26 @@ export function Main() {
     var remainCoins1 = 1500 - sumOfCoins
     var [remainCoins, setRemainCoins] = useState(remainCoins1)
 
-    console.log(remainCoins);
+    var error = document.getElementById("error")
 
     const adding1 = (id) => {
         setStudents(prevStudents => {
             return prevStudents.map(student => {
                 if (student.id === id) {
-                    setRemainCoins(() => {
-                        return remainCoins -= 1
-                    });
-                    return { ...student, coin: student.coin + 1 };
+                    if (remainCoins === 0) {
+                        error.classList.remove("absolute");
+                        error.classList.add("static");
+                        error.classList.remove("scale-0");
+                        error.classList.add("scale-90");
+                        error.classList.remove("-translate-y-full");
+                        error.classList.add("-translate-y-0");
+                        error.innerHTML = "<h1>There is no coins for adding</h1>";
+                    } else {
+                        setRemainCoins(() => {
+                            return remainCoins -= 1
+                        });
+                        return { ...student, coin: student.coin + 1 };
+                    }
                 };
                 return student
             })
@@ -85,10 +95,14 @@ export function Main() {
         setStudents(prevStudents => {
             return prevStudents.map(student => {
                 if (student.id === id) {
-                    setRemainCoins(() => {
-                        return remainCoins -= 5
-                    });
-                    return { ...student, coin: student.coin + 5 };
+                    if (remainCoins === 0) {
+                        alert("There is no coins for adding")
+                    } else {
+                        setRemainCoins(() => {
+                            return remainCoins -= 5
+                        });
+                        return { ...student, coin: student.coin + 5 };
+                    }
                 };
                 return student
             })
@@ -98,12 +112,21 @@ export function Main() {
         setStudents(prevStudents => {
             return prevStudents.map(student => {
                 if (student.id === id) {
-                    setRemainCoins(() => {
-                        return remainCoins += 1
-                    });
-                    return { ...student, coin: student.coin - 1 };
-                };
-
+                    if (student.coin > 0) {
+                        error.classList.add("scale-0");
+                        error.classList.remove("scale-90");
+                        error.classList.add("absolute");
+                        error.classList.remove("static");
+                        error.classList.add("-translate-y-full");
+                        error.classList.remove("-translate-y-0");
+                        setRemainCoins(() => {
+                            return remainCoins += 1
+                        });
+                        return { ...student, coin: student.coin - 1 };
+                    } else {
+                        alert(`${student.name} ${student.surname} has not coins`)
+                    }
+                }
                 return student
             })
         });
@@ -237,6 +260,11 @@ export function Main() {
                     </div>
                 </div>
             </section>
+            <div className="w-full flex items-center justify-center">
+                <section className="container w-full bg-red-600 bg-opacity-50 text-red-600 items-center justify-center py-10 scale-0 absolute flex -translate-y-full duration-500 text-2xl border border-red-700" id="error">
+                    <h1>There is no coins for adding</h1>
+                </section>
+            </div>
             <div>
                 <h1 className="react-reveal dark:text-white mx-5 animate-typing overflow-hidden whitespace-nowrap my-3 pr-5 text-md lg:text-3xl font-bold italic font-rem">Keep it up, you're almost there!💪</h1>
             </div>
