@@ -2,8 +2,7 @@ import { Card, Step, Stepper, Typography } from "@material-tailwind/react";
 import place1 from "./images/download.png";
 import place2 from "./images/2place.png";
 import place3 from "./images/3place.png";
-import students from "./students";
-import coin from "./images/coin.png";
+import coinImage from "./images/coin.png";
 import {
     Menu,
     MenuHandler,
@@ -11,8 +10,9 @@ import {
     MenuItem,
     Button,
 } from "@material-tailwind/react";
-import { FaHtml5, FaCss3, FaJs, FaGithub, FaReact } from "react-icons/fa";
+import { FaHtml5, FaCss3, FaJs, FaGithub, FaReact, FaTrashAlt } from "react-icons/fa";
 import { SiScratch, SiTailwindcss } from "react-icons/si";
+import { useState } from "react";
 
 const TABLE_HEAD = {
     number: "№",
@@ -22,6 +22,93 @@ const TABLE_HEAD = {
 };
 
 export function Main() {
+
+    var [students, setStudents] = useState([
+        {
+            id: 1, name: "Sevinch", surname: "Sayfutdinova", coin: 40,
+        },
+        {
+            id: 2, name: "Javohir", surname: "Murodov", coin: 30,
+        },
+        {
+            id: 3, name: "Shoxsulton", surname: "Isoqov", coin: 30,
+        },
+        {
+            id: 4, name: "Hamidulloh", surname: "Mirvorisov", coin: 0
+        },
+        {
+            id: 5, name: "Bexruz", surname: "Berdiyev", coin: 0
+        },
+        {
+            id: 6, name: "Behruz", surname: "Normurodov", coin: 0
+        },
+        {
+            id: 7, name: "Fayoziddin", surname: "Appakxodjayev", coin: 0
+        },
+        {
+            id: 8, name: "Mubina", surname: "Fathullayeva", coin: 0
+        },
+        {
+            id: 9, name: "Alibek", surname: "Akromov", coin: 0
+        },
+        {
+            id: 10, name: "Shoxdiyor", surname: "Shirinboyev", coin: -1,
+        },
+    ])
+    var arr = [];
+    students.forEach((coins) => {
+        arr.push(coins.coin)
+    })
+    var sumOfCoins = arr.reduce((a, b) => {
+        return a + b
+    })
+
+    var remainCoins1 = 1500 - sumOfCoins
+    var [remainCoins, setRemainCoins] = useState(remainCoins1)
+
+    console.log(remainCoins);
+
+    const adding1 = (id) => {
+        setStudents(prevStudents => {
+            return prevStudents.map(student => {
+                if (student.id === id) {
+                    return { ...student, coin: student.coin + 1 };
+                };
+                setRemainCoins(() => {
+                    return remainCoins -= 1
+                });
+                return student
+            })
+        });
+    }
+    const adding5 = (id) => {
+        setStudents(prevStudents => {
+            return prevStudents.map(student => {
+                if (student.id === id) {
+                    return { ...student, coin: student.coin + 5 };
+                };
+
+                setRemainCoins(() => {
+                    return remainCoins -= 5
+                });
+                return student
+            })
+        });
+    }
+    const minus1 = (id) => {
+        setStudents(prevStudents => {
+            return prevStudents.map(student => {
+                if (student.id === id) {
+                    return { ...student, coin: student.coin - 1 };
+                };
+
+                setRemainCoins(() => {
+                    return remainCoins += 1
+                });
+                return student
+            })
+        });
+    }
     return (
         <main className="container font-rem">
             <section>
@@ -30,8 +117,8 @@ export function Main() {
                     <h2 className="text-[#121212] dark:text-[#f3f4f6] text-lg font-bold flex flex-row items-stretch">
                         Total coins:
                         <span className="text-[#ffc107] flex flex-row gap-1 items-center">
-                            &nbsp; 1401
-                            <img src={coin} alt="coin" className="w-5 h-5 animate-rotate-y animate-infinite" />
+                            {remainCoins}
+                            <img src={coinImage} alt="coin" className="w-5 h-5 animate-rotate-y animate-infinite" />
                         </span>
                     </h2>
                     <Menu>
@@ -154,46 +241,54 @@ export function Main() {
             <div>
                 <h1 className="react-reveal dark:text-white mx-5 animate-typing overflow-hidden whitespace-nowrap my-3 pr-5 text-md lg:text-3xl font-bold italic font-rem">Keep it up, you're almost there!💪</h1>
             </div>
-            <Card className="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md w-full h-full text-center overflow-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-300">
+            <Card className="relative flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md w-full h-full text-center overflow-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-300">
                 <table className="w-full min-w-max table-auto text-center">
                     <thead className="w-full bg-gray-50">
-                        <tr className="">
-                            <th className="p-4 border-b border-[#ECEFF1] dark:border-b dark:border-[#CFD8DC] dark:bg-[#B0BEC5]">
+                        <tr className="border-b border-[#ECEFF1] dark:border-b dark:border-[#CFD8DC] dark:bg-[#B0BEC5]">
+                            <th className="p-4">
                                 <p className="antialiased text-blue-gray-900 font-bold text-lg font-rem flex justify-center leading-none opacity-70">{TABLE_HEAD.number}</p>
                             </th>
-                            <th className="p-4 border-b border-[#ECEFF1] dark:border-b dark:border-[#CFD8DC] dark:bg-[#B0BEC5]  dark:p-4">
+                            <th className="p-4">
                                 <p className="antialiased text-blue-gray-900 font-bold text-lg font-rem flex justify-center leading-none opacity-70">{TABLE_HEAD.Name}</p>
                             </th>
-                            <th className="p-4 border-b border-[#ECEFF1] dark:border-b dark:border-[#CFD8DC] dark:bg-[#B0BEC5]  dark:p-4">
+                            <th className="p-4">
                                 <p className="antialiased text-blue-gray-900 font-bold text-lg font-rem flex justify-center leading-none opacity-70">{TABLE_HEAD.Surname}</p>
                             </th>
-                            <th className="p-4 border-b border-[#ECEFF1] dark:border-b dark:border-[#CFD8DC] dark:bg-[#B0BEC5]">
+                            <th className="p-4">
                                 <p className="antialiased text-blue-gray-900 font-bold text-lg font-rem flex justify-center leading-none opacity-70">{TABLE_HEAD.img}</p>
+                            </th>
+                            <th className="p-4 flex justify-center items-center h-[60.52px]">
+                                <FaTrashAlt className=" text-red-500" />
                             </th>
                         </tr>
                     </thead>
                     <tbody>
-                        {students.map(({ name, surname, coin }, index) => (
-                            <tr key={name} className="dark:bg-[#212121]">
-                                <td className="p-4 border-b border-[#ECEFF1]">
+                        {students.map((student, index) => (
+                            <tr key={student.id} className="dark:bg-[#212121] border-b border-[#ECEFF1]">
+                                <td className="p-4">
                                     <h1 className="antialiased text-blue-gray-900 font-normal text-sm font-rem flex justify-center leading-none opacity-70 dark:text-white">
                                         {index + 1 === 1 ? <img src={place1} className=" animate-slipp" /> : index + 1 === 2 ? <img src={place2} /> : index + 1 === 3 ? <img src={place3} /> : index + 1}
                                     </h1>
                                 </td>
-                                <td className="p-4 border-b border-[#ECEFF1]">
+                                <td className="p-4">
                                     <h1 className="antialiased text-blue-gray-900 font-normal text-sm font-rem flex justify-center leading-none opacity-70 dark:text-white">
-                                        {name}
+                                        {student.name}
                                     </h1>
                                 </td>
-                                <td className="p-4 border-b border-[#ECEFF1]">
+                                <td className="p-4">
                                     <h1 className="antialiased text-blue-gray-900 font-normal text-sm font-rem flex justify-center leading-none opacity-70 dark:text-white">
-                                        {surname}
+                                        {student.surname}
                                     </h1>
                                 </td>
-                                <td className="p-4 border-b border-[#ECEFF1]">
-                                    <h1 as="a" href="#" className="antialiased text-blue-gray-900 font-normal text-sm font-rem flex justify-center leading-none opacity-70 dark:text-white">
-                                        {coin}
+                                <td className="p-4">
+                                    <h1 as="a" href="#" id="coin" className="antialiased text-blue-gray-900 font-normal text-sm font-rem flex justify-center leading-none opacity-70 dark:text-white">
+                                        {student.coin}
                                     </h1>
+                                </td>
+                                <td className="h-[65.09px] flex justify-center gap-1 items-center">
+                                    <button className="px-3.5 py-2.5 bg-gradient-to-br from-white dark:to-orange1 dark:from-gray-300 to-orange1 rounded-full text-white active:shadow-md active:shadow-red-600 duration-300" onClick={() => adding1(student.id)}>+1</button>
+                                    <button className="px-3 py-2.5 bg-gradient-to-br from-white dark:to-orange1 dark:from-gray-300 to-orange1 rounded-full text-white active:shadow-md active:shadow-red-600 duration-300" onClick={() => adding5(student.id)}>+5</button>
+                                    <button className="px-3.5 py-2.5 bg-gradient-to-br from-white dark:to-red-600 dark:from-red-300 to-red-600 rounded-full text-white active:shadow-md active:shadow-red-600 duration-300" onClick={() => minus1(student.id)}>-1</button>
                                 </td>
                             </tr>
                         ))}
