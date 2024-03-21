@@ -1,6 +1,6 @@
 import { Login } from "./Login/Login"
 import { Home } from "./Home/Home";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Error from "./Error/Error";
 
 function App() {
