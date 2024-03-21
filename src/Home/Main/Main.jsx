@@ -22,7 +22,6 @@ const TABLE_HEAD = {
 };
 
 export function Main() {
-
     var [students, setStudents] = useState([
         {
             id: 1, name: "Sevinch", surname: "Sayfutdinova", coin: 40,
@@ -165,8 +164,7 @@ export function Main() {
                         <div className="w-full sm:pt-8 sm:pb-12 py-6 sm:px-8 px-2">
                             <Stepper activeLineClassName="bg-orange1 h-[2px]">
                                 <Step
-                                    className={`sm:h-10 sm:w-10 w-8 h-8 bg-orange1 flex items-center justify-center
-                                        }`}>
+                                    className="sm:h-10 sm:w-10 w-8 h-8 bg-orange1 flex items-center justify-center">
                                     <SiScratch className="sm:h-5 sm:w-5 w-4 h-4 text-white" />
                                     <div className="absolute -bottom-[2rem] w-max text-center hidden sm:flex text-[#ffc107]">
                                         <Typography
@@ -178,8 +176,8 @@ export function Main() {
                                     </div>
                                 </Step>
                                 <Step
-                                    className={`sm:h-10 sm:w-10 w-8 h-8 bg-orange1 flex items-center justify-center
-                                        }`}>
+                                    className="sm:h-10 sm:w-10 w-8 h-8 bg-orange1 flex items-center justify-center
+                                        ">
                                     <FaHtml5 className="sm:h-5 sm:w-5 w-4 h-4 text-white" />
                                     <div className="absolute -bottom-[2rem] w-max text-center hidden sm:flex text-[#ffc107]">
                                         <Typography
@@ -191,8 +189,8 @@ export function Main() {
                                     </div>
                                 </Step>
                                 <Step
-                                    className={`sm:h-10 sm:w-10 w-8 h-8 bg-orange1 flex items-center justify-center
-                                        }`}>
+                                    className="sm:h-10 sm:w-10 w-8 h-8 bg-orange1 flex items-center justify-center
+                                        ">
                                     <FaCss3 className="sm:h-5 sm:w-5 w-4 h-4 text-white" />
                                     <div className="absolute -bottom-[2rem] w-max text-center hidden sm:flex text-[#ffc107]">
                                         <Typography
@@ -204,8 +202,8 @@ export function Main() {
                                     </div>
                                 </Step>
                                 <Step
-                                    className={`sm:h-10 sm:w-10 w-8 h-8 bg-orange1 flex items-center justify-center
-                                        }`}>
+                                    className="sm:h-10 sm:w-10 w-8 h-8 bg-orange1 flex items-center justify-center
+                                        ">
                                     <SiTailwindcss className="sm:h-5 sm:w-5 w-4 h-4 text-white" />
                                     <div className="absolute -bottom-[2rem] w-max text-center hidden sm:flex text-[#ffc107]">
                                         <Typography
@@ -217,8 +215,8 @@ export function Main() {
                                     </div>
                                 </Step>
                                 <Step
-                                    className={`sm:h-10 sm:w-10 w-8 h-8 bg-orange1 flex items-center justify-center
-                                        }`}>
+                                    className="sm:h-10 sm:w-10 w-8 h-8 bg-orange1 flex items-center justify-center
+                                        ">
                                     <FaGithub className="sm:h-5 sm:w-5 w-4 h-4 text-white" />
                                     <div className="absolute -bottom-[2rem] w-max text-center hidden sm:flex text-[#ffc107]">
                                         <Typography
@@ -230,8 +228,8 @@ export function Main() {
                                     </div>
                                 </Step>
                                 <Step
-                                    className={`sm:h-10 sm:w-10 w-8 h-8 bg-orange1 flex items-center justify-center
-                                        }`}>
+                                    className="sm:h-10 sm:w-10 w-8 h-8 bg-orange1 flex items-center justify-center
+                                        ">
                                     <FaJs className="sm:h-5 sm:w-5 w-4 h-4 text-white" />
                                     <div className="absolute -bottom-[2rem] w-max text-center hidden sm:flex text-[#ffc107]">
                                         <Typography
@@ -243,8 +241,8 @@ export function Main() {
                                     </div>
                                 </Step>
                                 <Step
-                                    className={`sm:h-10 sm:w-10 w-8 h-8 bg-[#b0bec5] flex items-center justify-center
-                                        }`}>
+                                    className="sm:h-10 sm:w-10 w-8 h-8 bg-[#b0bec5] flex items-center justify-center
+                                        ">
                                     <FaReact className="sm:h-5 sm:w-5 w-4 h-4 text-white" />
                                     <div className="absolute -bottom-[2rem] w-max text-center hidden sm:flex text-[#ffc107]">
                                         <Typography

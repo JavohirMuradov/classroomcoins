@@ -50,12 +50,24 @@ export default {
             width: "70%",
           }
         },
+        floting: {
+          "0%": {
+            transform: "translateY(0)",
+          },
+          "50%": {
+            transform: "translateY(15px)",
+          },
+          "100%": {
+            transform: "translateY(0)",
+          }
+        }
       },
       animation: {
         'slipp': 'slipp 1s infinite both',
         'text': 'text 5s ease-in infinite',
         'rotate-y': 'rotate-y 1s infinite both',
         'typing': 'typing 7s steps(50)',
+        'floting': 'floting 2s infinite',
       },
       colors: {
         orange1: "#FF4F28"

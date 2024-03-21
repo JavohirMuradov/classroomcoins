@@ -2,12 +2,20 @@ import { Main } from "./Main/Main"
 import darklogo from "./HeaderImages/darklogo.png";
 import lightlogo from "./HeaderImages/lightlogo.png";
 import avatar from "./HeaderImages/avatar.jpg";
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import useDarkSide from './useDarkside';
 import { DarkModeSwitch } from 'react-toggle-dark-mode';
 import { Footer } from "./Footer/Footer";
+import { useNavigate } from "react-router-dom";
 
 export const Home = () => {
+    var navigate = useNavigate()
+    var verify = localStorage.getItem('verify')
+    useEffect(() => {
+        if (!verify) {
+            navigate("/login")
+        }
+    })
     const [colorTheme, setTheme] = useDarkSide();
     const [darkSide, setDarkSide] = useState(colorTheme === 'light' ? true : false);
 
