@@ -12,7 +12,7 @@ import {
 } from "@material-tailwind/react";
 import { FaHtml5, FaCss3, FaJs, FaGithub, FaReact, FaTrashAlt } from "react-icons/fa";
 import { SiScratch, SiTailwindcss } from "react-icons/si";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const TABLE_HEAD = {
     number: "№",
@@ -130,6 +130,7 @@ export function Main() {
             })
         });
     }
+    var sortedStudents = students.sort((a, b) => b.coin - a.coin)
     return (
         <main className="container font-rem">
             <section>
@@ -288,7 +289,7 @@ export function Main() {
                         </tr>
                     </thead>
                     <tbody>
-                        {students.map((student, index) => (
+                        {sortedStudents.map((student, index) => (
                             <tr key={student.id} className="dark:bg-[#212121] border-b border-[#ECEFF1]">
                                 <td className="p-4">
                                     <h1 className="antialiased text-blue-gray-900 font-normal text-sm font-rem flex justify-center leading-none opacity-70 dark:text-white">
