@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import logo from "./images/logo.png";
 import kid from "./images/kid.jpg";
 import coin from "./images/coin.png";
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
@@ -82,8 +82,9 @@ export const Login = () => {
                                 </span>
                             </button>
                         </form>
-                        <div className="text-center pt-12 pb-12">
-                            <p className="font-bold text-yellow-800 flex flex-row gap-1 items-center justify-center">
+                        <div className="text-center pt-5 pb-12 flex flex-col items-center">
+                            <Link to={"/Register"} className='text-orange1 mt-1 w-full flex justify-center'>Don't have an account</Link>
+                            <p className="font-bold text-yellow-800 flex flex-row gap-1 items-center justify-center pl-3">
                                 Enjoy Your Coins{" "}
                                 <img
                                     src={coin}
