@@ -1,31 +1,40 @@
-import React, { useEffect, useState } from 'react'
-import logo from "./images/logo.png";
-import kid from "./images/kid.jpg";
-import coin from "./images/coin.png";
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import React, { useState } from 'react'
+import logo from "../Login/images/logo.png";
+import kid from "../Login/images/kid.jpg";
+import coin from "../Login/images/coin.png";
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import axios from 'axios';
 
-export const Login = () => {
+const Registration = () => {
     var navigate = useNavigate()
     var [email, setEmail] = useState(" ");
     var [password, setPassword] = useState("");
-    var verify = localStorage.getItem('verify')
-    useEffect(() => {
-        if (verify) {
-            navigate("/")
-        }
-    })
-    var Submit = async (e) => {
-        e.preventDefault()
+    var [err, setErr] = useState(true);
+    var submit = async (e) => {
+        e.preventDefault();
         var backend = await axios.get("https://crudcrud.com/api/b6cb70ee12144bc1bd992bbbcdb97953/unicorns")
-        for (let i = 0; i < backend.length; i++) {
-            if (email !== backend[i].email && email !== backend[i].password) {
-                return toast.error("incorrect email or password!")
+        var backendData = await backend.data
+        for (let i = 0; i < backendData.length; i++) {
+            if (backendData[i].email === email) {
+                console.log(backendData[i].email);
+                return toast.error("This email address is already exists.")
             }
         }
-        localStorage.setItem("verify", "true")
-        navigate("/")
+        for (let i = 0; i < password.length; i++) {
+            if (password[i] === password[i].toUpperCase()) {
+                setErr(false);
+            }
+        }
+        if (err === true) {
+            return toast.error("Password must have at least one capital letter");
+        }
+        if (!password.length > 8) {
+            return toast.error("Password must be at least 8 characters")
+        }
+        await axios.post("https://crudcrud.com/api/b6cb70ee12144bc1bd992bbbcdb97953/unicorns", { email: email, password: password })
+
+        navigate('/')
     }
     return (
         <div className="bg-white font-assistant h-screen overflow-hidden">
@@ -43,7 +52,7 @@ export const Login = () => {
                             Welcome.
                         </h1>
                         <form
-                            onSubmit={(e) => Submit(e)}
+                            onSubmit={(e) => submit(e)}
                             className="flex flex-col pt-3 md:pt-8">
                             <div className="flex flex-col pt-4">
                                 <label htmlFor="email" className="text-lg font-bold">
@@ -74,16 +83,17 @@ export const Login = () => {
                                 />
                             </div>
                             <button
-                                type={"submit"}
+                                type="submit"
                                 className="relative border border-orange1 mt-8 rounded px-5 py-2.5 overflow-hidden group bg-white hover:bg-gradient-to-r hover:from-white hover:to-orange1 text-black hover:text-gray-900 hover:ring-2 hover:ring-offset-2 hover:ring-orange1 active:ring-orange1 transition-all ease-out duration-300">
                                 <span className="absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 rotate-12 group-hover:-translate-x-96 ease"></span>
                                 <span className="relative text-xl font-bold">
-                                    Log In
+                                    Sign up
                                 </span>
                             </button>
                         </form>
-                        <div className="text-center pt-12 pb-12">
-                            <p className="font-bold text-yellow-800 flex flex-row gap-1 items-center justify-center">
+                        <div className="text-center pt-5 pb-12 flex items-center flex-col">
+                            <Link to={"/login"} className='text-orange1 mt-1 w-full flex justify-center'>Already have an account &#8594;</Link>
+                            <p className="font-bold text-yellow-800 flex flex-row gap-1 pl-3 items-center justify-center">
                                 Enjoy Your Coins{" "}
                                 <img
                                     src={coin}
@@ -105,3 +115,4 @@ export const Login = () => {
         </div>
     )
 }
+export default Registration

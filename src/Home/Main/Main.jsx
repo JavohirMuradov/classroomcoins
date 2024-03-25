@@ -12,7 +12,8 @@ import {
 } from "@material-tailwind/react";
 import { FaHtml5, FaCss3, FaJs, FaGithub, FaReact, FaTrashAlt } from "react-icons/fa";
 import { SiScratch, SiTailwindcss } from "react-icons/si";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { toast } from "react-toastify";
 
 const TABLE_HEAD = {
     number: "№",
@@ -65,20 +66,12 @@ export function Main() {
     var remainCoins1 = 1500 - sumOfCoins
     var [remainCoins, setRemainCoins] = useState(remainCoins1)
 
-    var error = document.getElementById("error")
-
     const adding1 = (id) => {
         setStudents(prevStudents => {
             return prevStudents.map(student => {
                 if (student.id === id) {
                     if (remainCoins === 0) {
-                        error.classList.remove("absolute");
-                        error.classList.add("static");
-                        error.classList.remove("scale-0");
-                        error.classList.add("scale-90");
-                        error.classList.remove("-translate-y-full");
-                        error.classList.add("-translate-y-0");
-                        error.innerHTML = "<h1>There is no coins for adding</h1>";
+                        toast.error("There is no coins for adding")
                     } else {
                         setRemainCoins(() => {
                             return remainCoins -= 1
@@ -95,7 +88,7 @@ export function Main() {
             return prevStudents.map(student => {
                 if (student.id === id) {
                     if (remainCoins === 0) {
-                        alert("There is no coins for adding")
+                        toast.error("There is no coins for adding")
                     } else {
                         setRemainCoins(() => {
                             return remainCoins -= 5
@@ -112,18 +105,12 @@ export function Main() {
             return prevStudents.map(student => {
                 if (student.id === id) {
                     if (student.coin > 0) {
-                        error.classList.add("scale-0");
-                        error.classList.remove("scale-90");
-                        error.classList.add("absolute");
-                        error.classList.remove("static");
-                        error.classList.add("-translate-y-full");
-                        error.classList.remove("-translate-y-0");
                         setRemainCoins(() => {
                             return remainCoins += 1
                         });
                         return { ...student, coin: student.coin - 1 };
                     } else {
-                        alert(`${student.name} ${student.surname} has not coins`)
+                        toast.error(`${student.name} ${student.surname} has not coins`)
                     }
                 }
                 return student
