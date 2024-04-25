@@ -3,8 +3,9 @@ import logo from "./images/logo.png";
 import kid from "./images/kid.jpg";
 import coin from "./images/coin.png";
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { toast } from 'react-toastify';
+import { auth } from '../utils/firebase';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 
 export const Login = () => {
     var navigate = useNavigate()
@@ -16,17 +17,19 @@ export const Login = () => {
             navigate("/")
         }
     })
-    var Submit = async (e) => {
+
+    const handleLogin = (e) => {
         e.preventDefault()
-        var backend = await axios.get("https://crudcrud.com/api/b6cb70ee12144bc1bd992bbbcdb97953/unicorns")
-        for (let i = 0; i < backend.length; i++) {
-            if (email !== backend[i].email && email !== backend[i].password) {
-                return toast.error("incorrect email or password!")
-            }
-        }
-        localStorage.setItem("verify", "true")
-        navigate("/")
-    }
+        signInWithEmailAndPassword(auth, email, password)
+            .then(() => {
+                // Handle successful login
+                localStorage.setItem("verify", "true")
+                navigate("/")
+            })
+            .catch((error) => {
+                return toast.error("Incorrect email or password!")
+            });
+    };
     return (
         <div className="bg-white font-assistant h-screen overflow-hidden">
             <div className="w-full flex flex-wrap">
@@ -43,7 +46,7 @@ export const Login = () => {
                             Welcome.
                         </h1>
                         <form
-                            onSubmit={(e) => Submit(e)}
+                            onSubmit={handleLogin}
                             className="flex flex-col pt-3 md:pt-8">
                             <div className="flex flex-col pt-4">
                                 <label htmlFor="email" className="text-lg font-bold">
@@ -83,7 +86,6 @@ export const Login = () => {
                             </button>
                         </form>
                         <div className="text-center pt-5 pb-12 flex flex-col items-center">
-                            <Link to={"/Register"} className='text-orange1 mt-1 w-full flex justify-center'>Don't have an account &#8594;</Link>
                             <p className="font-bold text-yellow-800 flex flex-row gap-1 items-center justify-center pl-3">
                                 Enjoy Your Coins{" "}
                                 <img

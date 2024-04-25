@@ -4,7 +4,6 @@ import { Route, Routes } from "react-router-dom";
 import Error from "./Error/Error";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Registration from "./Registration/Registration";
 
 function App() {
   return (
@@ -13,7 +12,6 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="*" element={<Error />} />
-        <Route path="/Register" element={<Registration />} />
       </Routes>
       <ToastContainer />
     </>
