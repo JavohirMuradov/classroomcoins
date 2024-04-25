@@ -12,8 +12,9 @@ import {
 } from "@material-tailwind/react";
 import { FaHtml5, FaCss3, FaJs, FaGithub, FaReact, FaTrashAlt } from "react-icons/fa";
 import { SiScratch, SiTailwindcss } from "react-icons/si";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { LoginApi } from "../../utils/LoginContext";
 
 const TABLE_HEAD = {
     number: "№",
@@ -23,6 +24,7 @@ const TABLE_HEAD = {
 };
 
 export function Main() {
+    var { email, setEmail, password, setPassword } = useContext(LoginApi)
     var [students, setStudents] = useState([
         {
             id: 1, name: "Sevinch", surname: "Sayfutdinova", coin: 40,
@@ -117,6 +119,21 @@ export function Main() {
             })
         });
     }
+    var [bg, setBg] = useState("#212121")
+
+    useEffect(() => {
+        students.forEach((student) => {
+            var name = email.split("@", 1)
+            if (student.name.toLowerCase() == name[0]) {
+                setBg("#616161")
+            } else {
+                setBg("#212121")
+            }
+            console.log(bg);
+            console.log(name[0]);
+            console.log(student.name.toLowerCase());
+        })
+    });
     var sortedStudents = students.sort((a, b) => b.coin - a.coin)
     return (
         <main className="container font-rem">
@@ -277,10 +294,10 @@ export function Main() {
                     </thead>
                     <tbody>
                         {sortedStudents.map((student, index) => (
-                            <tr key={student.id} className="dark:bg-[#212121] border-b border-[#ECEFF1]">
+                            <tr key={student.id} className={`dark:bg-[${bg}] border-b border-[#ECEFF1]`}>
                                 <td className="p-4">
                                     <h1 className="antialiased text-blue-gray-900 font-normal text-sm font-rem flex justify-center leading-none opacity-70 dark:text-white">
-                                        {index + 1 === 1 ? <img src={place1} className=" animate-slipp" /> : index + 1 === 2 ? <img src={place2} /> : index + 1 === 3 ? <img src={place3} /> : index + 1}
+                                        {index + 1 === 1 ? <img src={place1} className="animate-slipp" /> : index + 1 === 2 ? <img src={place2} /> : index + 1 === 3 ? <img src={place3} /> : index + 1}
                                     </h1>
                                 </td>
                                 <td className="p-4">
@@ -298,7 +315,7 @@ export function Main() {
                                         {student.coin}
                                     </h1>
                                 </td>
-                                <td className="h-[65.09px] flex justify-center gap-1 items-center">
+                                <td className={`h-[65.09px] flex justify-center gap-1 items-center`}>
                                     <button className="px-3.5 py-2.5 bg-gradient-to-br from-white dark:to-orange1 dark:from-gray-300 to-orange1 rounded-full text-white active:shadow-md active:shadow-red-600 duration-300" onClick={() => adding1(student.id)}>+1</button>
                                     <button className="px-3 py-2.5 bg-gradient-to-br from-white dark:to-orange1 dark:from-gray-300 to-orange1 rounded-full text-white active:shadow-md active:shadow-red-600 duration-300" onClick={() => adding5(student.id)}>+5</button>
                                     <button className="px-3.5 py-2.5 bg-gradient-to-br from-white dark:to-red-600 dark:from-red-300 to-red-600 rounded-full text-white active:shadow-md active:shadow-red-600 duration-300" onClick={() => minus1(student.id)}>-1</button>

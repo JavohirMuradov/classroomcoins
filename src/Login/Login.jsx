@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import logo from "./images/logo.png";
 import kid from "./images/kid.jpg";
 import coin from "./images/coin.png";
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { auth } from '../utils/firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
+import { LoginApi } from '../utils/LoginContext';
 
 export const Login = () => {
     var navigate = useNavigate()
-    var [email, setEmail] = useState(" ");
-    var [password, setPassword] = useState("");
+    var { email, setEmail, password, setPassword } = useContext(LoginApi)
     var verify = localStorage.getItem('verify')
     useEffect(() => {
         if (verify) {
