@@ -6,13 +6,13 @@ import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyAQhdKGxIERzlTPnv0Q3BfTAbZd54BkoFM",
-    authDomain: "classroomcoins.firebaseapp.com",
-    projectId: "classroomcoins",
-    storageBucket: "classroomcoins.appspot.com",
-    messagingSenderId: "122085735941",
-    appId: "1:122085735941:web:d96b3ac4ec035fd2d1e66c",
-    measurementId: "G-EY2E8S52X0"
+    apiKey: "AIzaSyAd9tUJU1bQewvFDbtZOE_UuxpXiTrf378",
+    authDomain: "classroomcoinsuz-64b9a.firebaseapp.com",
+    projectId: "classroomcoinsuz-64b9a",
+    storageBucket: "classroomcoinsuz-64b9a.appspot.com",
+    messagingSenderId: "767726624702",
+    appId: "1:767726624702:web:76f500ee3119bec31723ef",
+    measurementId: "G-7C3B441H8H"
 };
 
 // Initialize Firebase

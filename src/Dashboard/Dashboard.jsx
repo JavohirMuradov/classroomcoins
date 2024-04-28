@@ -1,19 +1,16 @@
-import { Main } from "./Main/Main";
+import { Main } from "./Main/Main"
 import darklogo from "./HeaderImages/darklogo.png";
 import lightlogo from "./HeaderImages/lightlogo.png";
 import avatar from "./HeaderImages/avatar.jpg";
 import React, { useEffect, useState } from 'react';
-// import useDarkSide from './useDarkside'; // You haven't provided this file
+import useDarkSide from './useDarkside';
 import { DarkModeSwitch } from 'react-toggle-dark-mode';
 import { Footer } from "./Footer/Footer";
 import { useNavigate } from "react-router-dom";
-import useDarkSide from "../Dashboard/useDarkside";
 
-
-
-const Home = () => {
+export const Dashboard = () => {
     var navigate = useNavigate()
-    var token = localStorage.getItem('verify')
+    var token = localStorage.getItem('token')
     useEffect(() => {
         if (!token) {
             navigate("/login")
@@ -29,18 +26,20 @@ const Home = () => {
     var [scale, setScale] = useState("scale-0");
     const func = () => {
         localStorage.removeItem("verify");
-        navigate("/")
+        navigate("/login")
     }
     return (
-        <div className="dark:bg-[#121212] bg-[#f3f4f6] font-rem h-full">
+        <div className=" dark:bg-[#121212] bg-[#f3f4f6] font-rem h-full">
             <header className="container">
                 <div className="h-16 flex items-center justify-between">
                     <div>
-                        <img src={darkSide ? darklogo : lightlogo} alt="logo" className="h-10 w-auto" />
+                        <img src={lightlogo} alt="lightlogo" className=" dark:hidden h-10 w-auto" />
+                        <img src={darklogo} alt="darklogo" className="hidden dark:inline-block h-10 w-auto" />
                     </div>
                     <div className="gap-5 flex justify-end w-1/2 relative">
                         <DarkModeSwitch checked={darkSide} onChange={toggleDarkMode} size={30} />
-                        <img src={avatar} alt="ava" className="rounded-full w-8 h-8" onClick={() => setScale(scale === "scale-0" ? "scale-100" : "scale-0")} />
+                        <img src={avatar} alt="ava" className="rounded-full w-8 h-8"
+                            onClick={() => setScale(scale === "scale-0" ? "scale-100" : "scale-0")} />
                         <div className={`absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-[rgb(33,33,33)] text-[#f3f4f5] py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none transform opacity-100 ${scale} top-12`}>
                             <button className="block px-4 py-2 text-sm hover:bg-[#606060] w-full text-start duration-300">Your profile</button>
                             <button className="block px-4 py-2 text-sm hover:bg-[#606060] w-full text-start duration-300">Settings</button>
@@ -48,12 +47,10 @@ const Home = () => {
                         </div>
                     </div>
                 </div>
-                <hr className="dark:bg-white h-[2px] bg-black" />
+                <hr className=" dark:bg-white h-[2px] bg-black" />
             </header>
             <Main />
             <Footer />
         </div>
-    );
+    )
 }
-
-export default Home;

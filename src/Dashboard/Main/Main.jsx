@@ -12,8 +12,7 @@ import {
 } from "@material-tailwind/react";
 import { FaHtml5, FaCss3, FaJs, FaGithub, FaReact, FaTrashAlt } from "react-icons/fa";
 import { SiScratch, SiTailwindcss } from "react-icons/si";
-import { useContext, useEffect, useState } from "react";
-import { LoginApi } from "../../utils/LoginContext";
+import { useContext } from "react";
 import { StudentsContext } from "../../utils/Students";
 
 const TABLE_HEAD = {
@@ -24,19 +23,7 @@ const TABLE_HEAD = {
 };
 
 export function Main() {
-    var { email } = useContext(LoginApi)
-    var { sortedStudents, remainCoins } = useContext(StudentsContext)
-    var [exactStudent, setExactStudent] = useState(0);
-
-    useEffect(() => {
-        sortedStudents.forEach((student) => {
-            var name = email ? email.split("@", 1) : localStorage.getItem("email").split("@", 1)
-            if (student.name.toLowerCase() == name[0]) {
-                setExactStudent(student.id)
-                console.log(name);
-            }
-        })
-    }, [sortedStudents]);
+    var { sortedStudents, remainCoins, adding1, adding5, minus1 } = useContext(StudentsContext)
     return (
         <main className="container font-rem">
             <section>
@@ -165,6 +152,11 @@ export function Main() {
                     </div>
                 </div>
             </section>
+            <div className="w-full flex items-center justify-center">
+                <section className="container w-full bg-red-600 bg-opacity-50 text-red-600 items-center justify-center py-10 scale-0 absolute flex -translate-y-full duration-500 text-2xl border border-red-700" id="error">
+                    <h1>There is no coins for adding</h1>
+                </section>
+            </div>
             <div>
                 <h1 className="react-reveal dark:text-white mx-5 animate-typing overflow-hidden whitespace-nowrap my-3 pr-5 text-md lg:text-3xl font-bold italic font-rem">Keep it up, you're almost there!💪</h1>
             </div>
@@ -184,11 +176,14 @@ export function Main() {
                             <th className="p-4">
                                 <p className="antialiased text-blue-gray-900 font-bold text-lg font-rem flex justify-center leading-none opacity-70">{TABLE_HEAD.img}</p>
                             </th>
+                            <th className="p-4 flex justify-center items-center h-[60.52px]">
+                                <FaTrashAlt className=" text-red-500" />
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
                         {sortedStudents.map((student, index) => (
-                            <tr key={student.id} className={`${student.id === exactStudent ? `bg-[#616161]` : "bg-[#212121]"} dark:${student.id === exactStudent ? `bg-[#616161]` : "bg-[#212121]"} border-b border-[#ECEFF1]`}>
+                            <tr key={student.id} className={`dark:bg-[#212121] border-b border-[#ECEFF1]`}>
                                 <td className="p-4">
                                     <h1 className="antialiased text-blue-gray-900 font-normal text-sm font-rem flex justify-center leading-none opacity-70 dark:text-white">
                                         {index + 1 === 1 ? <img src={place1} className="animate-slipp" /> : index + 1 === 2 ? <img src={place2} /> : index + 1 === 3 ? <img src={place3} /> : index + 1}
@@ -208,6 +203,11 @@ export function Main() {
                                     <h1 as="a" href="#" id="coin" className="antialiased text-blue-gray-900 font-normal text-sm font-rem flex justify-center leading-none opacity-70 dark:text-white">
                                         {student.coin}
                                     </h1>
+                                </td>
+                                <td className={`h-[65.09px] flex justify-center gap-1 items-center`}>
+                                    <button className="px-3.5 py-2.5 bg-gradient-to-br from-white dark:to-orange1 dark:from-gray-300 to-orange1 rounded-full text-white active:shadow-md active:shadow-red-600 duration-300" onClick={() => adding1(student.id)}>+1</button>
+                                    <button className="px-3 py-2.5 bg-gradient-to-br from-white dark:to-orange1 dark:from-gray-300 to-orange1 rounded-full text-white active:shadow-md active:shadow-red-600 duration-300" onClick={() => adding5(student.id)}>+5</button>
+                                    <button className="px-3.5 py-2.5 bg-gradient-to-br from-white dark:to-red-600 dark:from-red-300 to-red-600 rounded-full text-white active:shadow-md active:shadow-red-600 duration-300" onClick={() => minus1(student.id)}>-1</button>
                                 </td>
                             </tr>
                         ))}

@@ -14,19 +14,37 @@ export const Login = () => {
     var verify = localStorage.getItem('verify')
     useEffect(() => {
         if (verify) {
-            navigate("/")
+            navigate(`/`)
         }
     })
+    function generateRandomToken(length) {
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        let token = '';
+
+        for (let i = 0; i < length; i++) {
+            const randomIndex = Math.floor(Math.random() * characters.length);
+            token += characters.charAt(randomIndex);
+        }
+
+        return token;
+    }
+    const randomToken = generateRandomToken(1000);
 
     const handleLogin = (e) => {
         e.preventDefault()
         signInWithEmailAndPassword(auth, email, password)
             .then(() => {
-                // Handle successful login
-                localStorage.setItem("verify", "true")
-                navigate("/")
+                console.log(password);
+                if (email === "umarUzakoff@mail.ru" && password === "888869") {
+                    localStorage.setItem("token", randomToken)
+                    navigate("/dashboard")
+                } else {
+                    localStorage.setItem("verify", "true")
+                    localStorage.setItem("email", email)
+                    navigate("/")
+                }
             })
-            .catch((error) => {
+            .catch(() => {
                 return toast.error("Incorrect email or password!")
             });
     };
