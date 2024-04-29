@@ -66,6 +66,7 @@ export default {
         'slipp': 'slipp 1s infinite both',
         'text': 'text 5s ease-in infinite',
         'rotate-y': 'rotate-y 1s infinite both',
+        'rotate-y1': 'rotate-y 1s both',
         'typing': 'typing 7s steps(50)',
         'floting': 'floting 2s infinite',
       },
