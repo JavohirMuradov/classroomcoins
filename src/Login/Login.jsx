@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect } from 'react'
 import logo from "./images/logo.png";
 import kid from "./images/kid.jpg";
 import coin from "./images/coin.png";

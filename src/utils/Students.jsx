@@ -1,5 +1,8 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
 import React, { useState, createContext } from "react";
 import 'firebase/firestore';
+import { toast } from "react-toastify";
 
 export const StudentsContext = createContext({});
 
@@ -59,7 +62,7 @@ const Students = ({ children }) => {
                         });
                         return { ...student, coin: student.coin + 1 };
                     }
-                };
+                }
                 return student
             })
         });
@@ -76,7 +79,7 @@ const Students = ({ children }) => {
                         });
                         return { ...student, coin: student.coin + 5 };
                     }
-                };
+                }
                 return student
             })
         });

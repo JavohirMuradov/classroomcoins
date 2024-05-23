@@ -158,7 +158,10 @@ export function Main() {
                 </section>
             </div>
             <div>
-                <h1 className="react-reveal dark:text-white mx-5 animate-typing overflow-hidden whitespace-nowrap my-3 pr-5 text-md lg:text-3xl font-bold italic font-rem">Keep it up, you're almost there!💪</h1>
+                {
+                    // eslint-disable-next-line react/no-unescaped-entities
+                    <h1 className="react-reveal dark:text-white mx-5 animate-typing overflow-hidden whitespace-nowrap my-3 pr-5 text-md lg:text-3xl font-bold italic font-rem">Keep it up, you're almost there!💪</h1>
+                }
             </div>
             <Card className="relative flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md w-full h-full text-center overflow-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-300">
                 <table className="w-full min-w-max table-auto text-center">
@@ -200,7 +203,7 @@ export function Main() {
                                     </h1>
                                 </td>
                                 <td className="p-4">
-                                    <h1 as="a" href="#" id="coin" className="antialiased text-blue-gray-900 font-normal text-sm font-rem flex justify-center leading-none opacity-70 dark:text-white">
+                                    <h1 href="#" id="coin" className="antialiased text-blue-gray-900 font-normal text-sm font-rem flex justify-center leading-none opacity-70 dark:text-white">
                                         {student.coin}
                                     </h1>
                                 </td>

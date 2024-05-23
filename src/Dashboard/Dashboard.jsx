@@ -2,7 +2,7 @@ import { Main } from "./Main/Main"
 import darklogo from "./HeaderImages/darklogo.png";
 import lightlogo from "./HeaderImages/lightlogo.png";
 import avatar from "./HeaderImages/avatar.jpg";
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import useDarkSide from './useDarkside';
 import { DarkModeSwitch } from 'react-toggle-dark-mode';
 import { Footer } from "./Footer/Footer";
